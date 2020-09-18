@@ -4,9 +4,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mydefault.app.common.util.StringUtil;
@@ -23,7 +25,7 @@ public class UserController extends GenericController<UserVO,UserService>{
 		super(UserVO.class , UserService.class);
 	}
 	
-	@RequestMapping(value = "/login")
+	@RequestMapping(value = "/login" , method = RequestMethod.POST)
 	public ModelAndView login(UserVO entity, HttpServletRequest request , ModelMap model) throws Exception {
 		logger.info("login UserVO = {}" , entity);
 		try {
