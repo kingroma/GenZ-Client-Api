@@ -28,13 +28,19 @@ public class UserController extends GenericController<UserVO,UserService>{
 	@RequestMapping(value = "/login" , method = RequestMethod.POST)
 	public ModelAndView login(UserVO entity, HttpServletRequest request , ModelMap model) throws Exception {
 		logger.info("login UserVO = {}" , entity);
+		model.addAttribute("status",500);
+		model.addAttribute("userToken",null);
 		try {
 			UserVO result = service.login(entity);
 			logger.info("Mapper Result = {}" , result);
 			if ( result != null )  { 
 				model.addAttribute("userToken",result.getUserToken());
+				model.addAttribute("si",result.getSi());
+				model.addAttribute("gu",result.getGu());
+				model.addAttribute("dong",result.getDong());
+				model.addAttribute("status",200);
 			}
-			
+			model.remove("userVO");
 		} catch (Exception e) {
 			StringUtil.exceptionMsg(this.getClass(), e);
 		}

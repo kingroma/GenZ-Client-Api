@@ -6,8 +6,12 @@
 	<select id="login" resultType="UserVO">
 		SELECT 
 			U.USER_ID , 
-			U.USER_PW , 
-			UT.USER_TOKEN  
+			U.USER_PW ,
+			U.SI , 
+			U.GU , 
+			U.DONG , 
+			UT.USER_TOKEN 
+					  
 		FROM T_USER U
 		
 		LEFT OUTER JOIN T_USER_TOKEN UT 
