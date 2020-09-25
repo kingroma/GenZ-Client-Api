@@ -30,11 +30,6 @@ public class GenericController<T, S extends GenericService<T, ? extends GenericM
 		this.serviceClass = serviceClass;
 	}
 	
-	protected GenericController(Class<T> voClass, Class<S> serviceClass, String filePath, String fileSuffix) {
-		this.voClass = voClass;
-		this.serviceClass = serviceClass;
-	}
-	
 	public void setApplicationContext(ApplicationContext applicationContext) {
 		this.applicationContext = applicationContext;
 	}
@@ -43,36 +38,5 @@ public class GenericController<T, S extends GenericService<T, ? extends GenericM
 		service = (S)ApplicationContextUtils.getBeanByType(applicationContext, serviceClass);
 	}
 
-	@ModelAttribute
-	public T command() throws Exception {
-		try{
-			T vo = (T) voClass.newInstance();
-			return vo;
-		} catch(InstantiationException ie) {
-			throw new Exception(ie);
-		} catch(IllegalAccessException iae) {
-			throw new Exception(iae);
-		} catch (Exception e) {
-			throw new Exception(e);
-		}
-	}
-	
-	public T addReference(T entity, ModelMap model) throws Exception {
-		try{
-			//entity = (T) voClass.newInstance(); // findBugs
-			T vo = (T) voClass.newInstance();
-			return vo;
-		} catch(InstantiationException ie) {
-			throw new Exception(ie);
-		} catch(IllegalAccessException iae) {
-			throw new Exception(iae);
-		} catch (Exception e) {
-			throw new Exception(e);
-		}
-	}
-
-	public T addViewReference(T entity, ModelMap model) throws Exception {
-		return entity;
-	}
 	
 }

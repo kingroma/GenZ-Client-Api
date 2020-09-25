@@ -1,21 +1,18 @@
-INSERT INTO T_USER VALUES ( 'admin' , 'admin' , '인천시','계양구','용종동' ) ; 
-INSERT INTO T_USER_TOKEN VALUES ( 'admin','abcdefghijk' ) ; 
+INSERT INTO T_USER VALUES ( 'guest1' , '1234' ,'guest1', 'guest1', '인천시','계양구','용종동' , now(), now() , 'N' , NULL ) ; 
+INSERT INTO T_USER_TOKEN values ('guest1','abcef',now());
 
-insert into t_interest values (1,'BTS');
-insert into t_interest values (2,'마마무');
-insert into t_interest values (3,'트와이스');
-insert into t_interest values (4,'그룹 1');
-insert into t_interest values (5,'그룹 2');
-insert into t_interest values (6,'그룹 3');
-insert into t_interest values (7,'그룹 4');
-insert into t_interest values (8,'그룹 5');
-insert into t_interest values (9,'그룹 6');
-insert into t_interest values (10,'그룹 7');
-insert into t_interest values (11,'그룹 8');
-insert into t_interest values (12,'그룹 9');
-insert into t_interest values (13,'그룹 10');
-insert into t_interest values (14,'그룹 11');
-insert into t_interest values (15,'그룹 12');
-insert into t_interest values (16,'그룹 13');
-insert into t_interest values (17,'그룹 14');
-insert into t_interest values (18,'그룹 15');
+INSERT INTO T_USER VALUES ( 'guest2' , '1234' ,'guest2', 'guest2', '인천시','계양구','용종동' , now(), now() , 'N' , NULL ) ;
+INSERT INTO T_USER_TOKEN values ('guest2','accef',now());
+
+INSERT INTO T_USER_FRIEND VALUES ('guest1','guest2','guest2' , now(),now());
+INSERT INTO T_USER_FRIEND VALUES ('guest2','guest1','guest1' , now(),now());
+
+INSERT INTO T_GROUP VALUES ('group1','group1',now(),now());
+
+INSERT INTO T_USER_GROUP VALUES ( 'guest1','group1','group1',now(),now());
+
+INSERT INTO T_CATEGORY VALUES ( 'category1' , 'TOP' , 'category1' , 1, now(),now(),'N',null);
+INSERT INTO T_CATEGORY VALUES ( 'cate1' , 'category1' , 'cate1' , 2, now(),now(),'N',null);
+
+INSERT INTO T_USER_CATEGORY VALUES ( 'guest1' , 'cate1' ,now() );
+

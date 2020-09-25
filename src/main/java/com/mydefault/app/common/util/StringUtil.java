@@ -13,6 +13,16 @@ public class StringUtil {
 	
 	private static final int BYTE_KR = 3;
 	
+	public static boolean isNotNullNotEmpty(String str) {
+		boolean result = false ; 
+		
+		if ( str != null && !str.isEmpty() ) {
+			result = true ; 
+		}
+		
+		return result ; 
+	}
+	
 	public static String isString(Object object) {
         String string = ""; 
         if (object != null) {

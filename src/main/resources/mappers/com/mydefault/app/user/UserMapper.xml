@@ -7,9 +7,13 @@
 		SELECT 
 			U.USER_ID , 
 			U.USER_PW ,
-			U.SI , 
-			U.GU , 
-			U.DONG , 
+			U.USER_NAME , 
+			U.USER_NICKNAME , 
+			U.USER_SI , 
+			U.USER_GU , 
+			U.USER_DONG , 
+			U.REGIST_DATE , 
+			U.UPDATE_DATE ,
 			UT.USER_TOKEN 
 					  
 		FROM T_USER U
@@ -22,4 +26,98 @@
 		AND	U.USER_PW = #{userPw}
 	</select>
 	
+	<select id="getUserByUserToken" resultType="UserVO">
+		SELECT 
+				U.USER_ID , 
+				U.USER_PW ,
+				U.USER_NAME , 
+				U.USER_NICKNAME , 
+				U.USER_SI , 
+				U.USER_GU , 
+				U.USER_DONG , 
+				U.REGIST_DATE , 
+				U.UPDATE_DATE ,
+				UT.USER_TOKEN 
+						  
+			FROM T_USER U
+			
+			LEFT OUTER JOIN T_USER_TOKEN UT 
+				ON U.USER_ID = UT.USER_ID
+				  
+			WHERE 
+				UT.USER_TOKEN = #{userToken}
+	</select>
+	
+	<select id="friend" resultType="UserVO">
+		SELECT 
+			UF.USER_ID , 
+			UF.FRIEND_ID ,
+			UF.FRIEND_NICKNAME , 
+			UF.REGIST_DATE , 
+			UF.UPDATE_DATE 
+			 
+		FROM T_USER_FRIEND UF
+		LEFT OUTER JOIN T_USER U
+			ON UF.FRIEND_ID = U.USER_ID
+		
+		WHERE 
+			UF.USER_ID = #{userId}
+	</select>
+	
+	<select id="group" resultType="UserVO">
+		SELECT 
+			UG.GROUP_ID ,
+			UG.GROUP_NICKNAME , 
+			UG.REGIST_DATE , 
+			UG.UPDATE_DATE 
+			 
+		FROM T_USER_GROUP UG
+		LEFT OUTER JOIN T_GROUP G
+			ON UG.GROUP_ID = G.GROUP_ID
+		
+		WHERE 
+			UG.USER_ID = #{userId}
+	</select>
+	
+	<select id="category" resultType="UserVO">
+		SELECT 
+			UC.CATEGORY_ID ,
+			UC.REGIST_DATE ,
+			C.CATEGORY_NAME ,
+			C.CATEGORY_LEVEL 
+			 
+		FROM T_USER_CATEGORY UC
+		LEFT OUTER JOIN T_CATEGORY C
+			ON UC.CATEGORY_ID = C.CATEGORY_ID
+		
+		WHERE 
+			UC.USER_ID = #{userId}
+	</select>
+	
+	<select id="ignore" resultType="UserVO">
+		SELECT 
+			UI.USER_ID , 
+			UI.IGNORE_ID , 
+			UI.REGIST_DATE
+			 
+		FROM T_USER_IGNORE UI
+		LEFT OUTER JOIN T_USER U
+			ON UI.IGNORE_ID = U.USER_ID
+		
+		WHERE 
+			UI.USER_ID = #{userId}
+	</select>
+	
+	<select id="follow" resultType="UserVO">
+		SELECT
+			UF.USER_ID , 
+			UF.FOLLOW_ID , 
+			UF.REGIST_DATE
+		FROM T_USER_FOLLOW UF 
+		LEFT OUTER JOIN T_USER U
+			ON UF.FOLLOW_ID = U.USER_ID 
+			
+		WHERE 
+			UF.USER_ID = #{userId}
+	</select>
 </mapper>
